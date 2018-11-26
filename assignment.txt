@@ -1,0 +1,40 @@
+Project: Balancing equations application
+
+Han: He's a 7th grade autodidact and aspiring inventor.
+
+
+User Stories:
+
+1.  As Han, the 7th grade autodidact and aspiring inventor, he wants to see a landing page,
+so that he can decide whether or not to use the application
+
+2. As Han, the 7th grade autodidact and aspiring inventor, he wants to see a static how-to page so he can
+see how the application works.
+
+3. As Han, the 7th grade autodidact and aspiring inventor, he wants sign up and pay for a subscription
+so that he can use the application
+
+4. As Han or admin, we'd like to sign-in to the application so we can access our data
+
+5. As Han or admin, we'd like to sign out of the application so we can close the connection to our data
+
+6. As Han, the 7th grade autodidact and aspiring inventor, he'd like to cancel his subscription
+if/when he no longer needs the application, so he doesn't have to pay anymore.
+
+7. As Han, the 7th grade autodidact and aspiring inventor, he'd like see a balancing an equation page
+with an equation to balance so that he can practice his balancing equations skills.
+
+8. As Han, the 7th grade autodidact and aspiring inventor, he'd like to see if his inputs to the
+equation are valid so that he can get feedback from the application as to whether he got it correct.
+
+9. As Han, the 7th grade autodidact and aspiring inventor, hed like to get feedback after submission to
+see if his answer was correct.
+
+10. As Han, the 7th grade autodidact and aspiring inventor, he'd like to see a new problem once he
+gets a problem correct so that he can continue practicing.
+
+11. As Han, the 7th grade autodidact and aspiring inventor, he'd like to see a history page of all the
+problems he successfully completed.
+
+12. As an admin, I'd like to see a page where I can enter details for a new problem, so that I can give
+my students a variety of problems to work on.
