@@ -1,0 +1,28 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "Balancing Equations App",
+  "main": "index.js",
+  "scripts": {
+    "test": "set NODE_ENV=test&& jasmine",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bnreine/capstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bnreine/capstone/issues"
+  },
+  "homepage": "https://github.com/bnreine/capstone#readme",
+  "devDependencies": {
+    "jasmine": "^3.3.0",
+    "request": "^2.88.0"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
