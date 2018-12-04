@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  <body>
+
+      <!-- Navigation -->
+      <% include ../static/partials/navbar.ejs %>
+
+      <!-- Page Content -->
+      <main class="container">
+
+
+          <h1>Problem #1</h1>
+
+
+          <form action="/" method="get">
+
+
+            <% reactionSpecies.reactantSpecies.forEach((reactant, index) => { %>
+
+              <% if(index!== 0) { %>
+                <span> + </span>
+              <% } %>
+
+              <span class="form-group">
+                <label for=<%= reactant.Specie.formula %>><%= reactant.Specie.formula %></label>
+                <input type="text" name=<%= reactant.Specie.formula %>>
+              </span>
+
+            <% }) %>
+
+            <span>----></span>
+
+            <% reactionSpecies.productSpecies.forEach((product, index) => { %>
+
+              <% if(index!== 0) { %>
+                <span> + </span>
+              <% } %>
+
+              <span class="form-group">
+                <label for=<%= product.Specie.formula %>><%= product.Specie.formula %></label>
+                <input type="text" name=<%= product.Specie.formula %>>
+              </span>
+
+            <% }) %>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Check Answer</button>
+          </form>
+
+
+      </main>
+      <!-- /.container -->
+
+      <% include ../static/partials/baseScripts.ejs %>
+    </body>
+</html>

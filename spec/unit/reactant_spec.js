@@ -87,6 +87,64 @@ describe("Reactant", () => {
 
 
 
+  describe("#findById()", () => {
+    it("should find reactant by Id", (done) => {
+      Reactant.findById(1)
+      .then((reactant) => {
+        expect(reactant.speciesId).toBe(1);
+        done();
+      })
+    })
+  })
+
+
+  describe("#all()", () => {
+    it("should find all reactants", (done) => {
+      Reactant.all()
+      .then((reactants) => {
+        expect(reactants[0].speciesId).toBe(1);
+        done();
+      })
+    })
+  })
+
+
+describe("findById on reactant with eager loading specie", () => {
+  it("should find the reactant and eager load the associated specie", (done) => {
+    Reactant.findById(1, {
+      include: [{
+        model: Specie
+      }]
+    })
+    .then((reactant) => {
+      expect(reactant.Specie.id).toBe(1);
+      done();
+    })
+
+
+  })
+})
+
+
+
+describe("findAll on Reactant with eager loading specie for each reactant", () => {
+  it("should find all reactants and eager load the associated specie for each one", (done) => {
+    Reactant.findAll({
+      include: [{
+        model: Specie
+      }]
+    })
+    .then((reactants) => {
+      expect(reactants[0].Specie.id).toBe(1);
+      done();
+    })
+
+
+  })
+})
+
+
+
 
 
 
