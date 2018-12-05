@@ -50,6 +50,10 @@ module.exports = {
 
       }
     })
+  },
+
+  showNextProblem(req, res, next){
+    res.send("Problem #1");
   }
 
 

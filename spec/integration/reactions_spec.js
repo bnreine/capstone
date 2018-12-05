@@ -14,10 +14,14 @@ describe("routes: reactions", () => {
     this.specie2;
     this.specie3;
     this.specie4;
+    this.specie5;
     this.reactant1;
     this.reactant2;
+    this.reactant3;
+    this.reactant4;
     this.product3;
     this.product4;
+    this.product5;
 
 
     sequelize.sync({force: true}).then((res) => {
@@ -37,11 +41,14 @@ describe("routes: reactions", () => {
     .then((specie1) => {
       this.specie1 = specie1;
       this.reactant1 = specie1.reactants[0];
-      //this.product1 = specie1.products[0];
       Specie.create({
         formula: "Cl2",
         reactants: [{
           reactionId: 1,
+          coefficient: 1
+        },
+        {
+          reactionId: 2,
           coefficient: 1
         }]
       }, {
@@ -53,10 +60,15 @@ describe("routes: reactions", () => {
       .then((specie2) => {
         this.specie2 = specie2;
         this.reactant2 = specie2.reactants[0];
+        this.reactant4 = specie2.reactants[1];
         Specie.create({
           formula: "HCl",
           products: [{
             reactionId: 1,
+            coefficient: 2
+          },
+          {
+            reactionId: 2,
             coefficient: 2
           }]
         }, {
@@ -68,6 +80,7 @@ describe("routes: reactions", () => {
         .then((specie3) => {
           this.specie3 = specie3;
           this.product3 = specie3.products[0];
+          this.product5 = specie3.products[1];
           Specie.create({
             formula: "Br2",
             products: [{
@@ -83,7 +96,23 @@ describe("routes: reactions", () => {
           .then((specie4) => {
             this.specie4 = specie4;
             this.product4 = specie4.products[0];
-            done();
+            Specie.create({
+              formula: "H2",
+              reactants: [{
+                reactionId: 2,
+                coefficient: 1
+              }]
+            }, {
+              include: [{
+                model: Reactant,
+                as: "reactants"
+              }]
+            })
+            .then((specie5) => {
+              this.specie5 = specie5;
+              this.reactant3 = specie5.reactants[0];
+              done();
+            })
           })
         })
       })
@@ -98,8 +127,8 @@ describe("routes: reactions", () => {
     it("should render the problem page", (done) => {
 
 
-      request.get(`${base}problems/${1}`, (err, res, body) => {
-        expect(body).toContain("Problem #");
+      request.get(`${base}problems/1`, (err, res, body) => {
+        expect(body).toContain("Problem #1");
         done();
       })
     })
@@ -109,7 +138,7 @@ describe("routes: reactions", () => {
   describe("POST /problems/:problemId/check_answer", () => {
     it("should submit correct answers and match with those in the database", (done) => {
       const options = {
-        url: `${base}problems/${1}/check_answer`,
+        url: `${base}problems/1/check_answer`,
         form: {
           Reactant1Coefficient: 2,
           Reactant2Coefficient: 1,
@@ -118,13 +147,22 @@ describe("routes: reactions", () => {
         }
       }
       request.post(options, (err, res, body) => {
-        expect(body).toContain("Problem #");
+        expect(body).toContain("Problem #1");
         done();
       })
 
     })
   })
 
+
+  describe("GET /problems/:problemId/next_problem", () => {
+    it("should render the problem page with the next problem", (done) => {
+      request.get(`${base}problems/1/next_problem`, (err, res, body) => {
+        expect(body).toContain("Problem #2");
+        done();
+      })
+    })
+  })
 
 
 
