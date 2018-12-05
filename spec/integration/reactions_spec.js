@@ -16,10 +16,6 @@ describe("routes: reactions", () => {
     this.specie4;
     this.reactant1;
     this.reactant2;
-    this.reactant3;
-    this.reactant4;
-    this.product1;
-    this.product2;
     this.product3;
     this.product4;
 
@@ -29,90 +25,63 @@ describe("routes: reactions", () => {
     Specie.create({
       formula: "HBr",
       reactants: [{
-        reactionId: 1
-      }],
-      products: [{
-        reactionId: 1
+        reactionId: 1,
+        coefficient: 2
       }]
     }, {
       include: [{
         model: Reactant,
         as: "reactants"
-      },
-      {
-        model: Product,
-        as: "products"
       }]
     })
     .then((specie1) => {
       this.specie1 = specie1;
       this.reactant1 = specie1.reactants[0];
-      this.product1 = specie1.products[0];
+      //this.product1 = specie1.products[0];
       Specie.create({
         formula: "Cl2",
         reactants: [{
-          reactionId: 1
-        }],
-        products: [{
-          reactionId: 1
+          reactionId: 1,
+          coefficient: 1
         }]
       }, {
         include: [{
           model: Reactant,
           as: "reactants"
-        },
-        {
-          model: Product,
-          as: "products"
         }]
       })
       .then((specie2) => {
         this.specie2 = specie2;
         this.reactant2 = specie2.reactants[0];
-        this.product2 = specie2.products[0];
         Specie.create({
           formula: "HCl",
-          reactants: [{
-            reactionId: 1
-          }],
           products: [{
-            reactionId: 1
+            reactionId: 1,
+            coefficient: 2
           }]
         }, {
           include: [{
-            model: Reactant,
-            as: "reactants"
-          },
-          {
             model: Product,
             as: "products"
           }]
         })
         .then((specie3) => {
           this.specie3 = specie3;
-          this.reactant3 = specie3.reactants[0];
           this.product3 = specie3.products[0];
           Specie.create({
             formula: "Br2",
-            reactants: [{
-              reactionId: 1
-            }],
             products: [{
-              reactionId: 1
+              reactionId: 1,
+              coefficient: 1
             }]
           }, {
             include: [{
-              model: Reactant,
-              as: "reactants"
-            },
-            {
               model: Product,
               as: "products"
             }]
           })
           .then((specie4) => {
             this.specie4 = specie4;
-            this.reactant4 = specie4.reactants[0];
             this.product4 = specie4.products[0];
             done();
           })
@@ -133,6 +102,26 @@ describe("routes: reactions", () => {
         expect(body).toContain("Problem #");
         done();
       })
+    })
+  })
+
+
+  describe("POST /problems/:problemId/check_answer", () => {
+    it("should submit correct answers and match with those in the database", (done) => {
+      const options = {
+        url: `${base}problems/${1}/check_answer`,
+        form: {
+          Reactant1Coefficient: 2,
+          Reactant2Coefficient: 1,
+          Product1Coefficient: 2,
+          Product2Coefficient: 1
+        }
+      }
+      request.post(options, (err, res, body) => {
+        expect(body).toContain("Problem #");
+        done();
+      })
+
     })
   })
 

@@ -2,7 +2,7 @@
   "name": "capstone",
   "version": "1.0.0",
   "description": "Balancing Equations App",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "set NODE_ENV=test&& jasmine",
     "start": "node src/server.js"
@@ -26,6 +26,9 @@
     "dotenv": "^6.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "flash": "^1.1.0",
     "pg": "^7.7.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.32.6",

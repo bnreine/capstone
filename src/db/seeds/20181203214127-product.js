@@ -8,7 +8,8 @@ products.push({
   reactionId: 1,
   speciesId: 3,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  coefficient: 2
 });
 
 products.push({
@@ -16,7 +17,8 @@ products.push({
   reactionId: 1,
   speciesId: 4,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  coefficient: 1
 });
 
 

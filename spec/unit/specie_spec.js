@@ -13,7 +13,8 @@ describe("Specie", () => {
       Specie.create({
         formula: "H2",
         reactants: [{
-          reactionId: 1
+          reactionId: 1,
+          coefficient: 5
         }]
       }, {
         include: {

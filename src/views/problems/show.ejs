@@ -10,12 +10,12 @@
 
       <!-- Page Content -->
       <main class="container">
-
+        <% include ../static/partials/messages.ejs %>
 
           <h1>Problem #1</h1>
 
 
-          <form action="/" method="get">
+          <form action="/problems/1/check_answer" method="POST">
 
 
             <% reactionSpecies.reactantSpecies.forEach((reactant, index) => { %>
@@ -25,8 +25,15 @@
               <% } %>
 
               <span class="form-group">
-                <label for=<%= reactant.Specie.formula %>><%= reactant.Specie.formula %></label>
-                <input type="text" name=<%= reactant.Specie.formula %>>
+                <label for=<%= `Reactant${index+1}Coefficient` %>><%= reactant.Specie.formula %></label>
+                <input type="text" name=<%=   `Reactant${index+1}Coefficient` %> value=
+
+                <% if(showAnswers){ %>
+                  <%= reactant.coefficient %>
+                <% } else { %>
+                  ""
+                <% } %>
+                >
               </span>
 
             <% }) %>
@@ -40,8 +47,15 @@
               <% } %>
 
               <span class="form-group">
-                <label for=<%= product.Specie.formula %>><%= product.Specie.formula %></label>
-                <input type="text" name=<%= product.Specie.formula %>>
+                <label for=<%= `Product${index+1}Coefficient` %>><%= product.Specie.formula %></label>
+                <input type="text" name=<%= `Product${index+1}Coefficient` %> value=
+
+                <% if(showAnswers){ %>
+                  <%= product.coefficient %>
+                <% } else { %>
+                  ""
+                <% } %>
+                >
               </span>
 
             <% }) %>
@@ -49,6 +63,8 @@
             <br>
             <button type="submit" class="btn btn-primary">Check Answer</button>
           </form>
+          <br>
+          <a href="/" class="btn btn-primary">Next Problem</a>
 
 
       </main>
