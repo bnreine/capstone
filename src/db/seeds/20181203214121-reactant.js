@@ -8,7 +8,8 @@ reactants.push({
   reactionId: 1,
   speciesId: 1,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  coefficient: 2
 });
 
 reactants.push({
@@ -16,7 +17,8 @@ reactants.push({
   reactionId: 1,
   speciesId: 2,
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
+  coefficient: 1
 });
 
 

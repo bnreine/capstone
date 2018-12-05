@@ -17,7 +17,8 @@ describe("Reactant", () => {
         this.specie1 = specie1;
         Reactant.create({
           reactionId: 1,
-          speciesId: this.specie1.id
+          speciesId: this.specie1.id,
+          coefficient: 3
         })
         .then((reactant) => {
           this.reactant = reactant;
@@ -40,11 +41,13 @@ describe("Reactant", () => {
     it("should create a new reactant", (done) => {
       Reactant.create({
         reactionId: 2,
-        speciesId: this.specie1.id
+        speciesId: this.specie1.id,
+        coefficient: 4
       })
       .then((reactant) => {
         expect(reactant.reactionId).toBe(2);
         expect(reactant.speciesId).toBe(1);
+        expect(reactant.coefficient).toBe(4);
         done();
       })
       .catch((err) => {

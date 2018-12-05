@@ -17,7 +17,8 @@ describe("Product", () => {
         this.specie1 = specie1;
         Product.create({
           reactionId: 1,
-          speciesId: this.specie1.id
+          speciesId: this.specie1.id,
+          coefficient: 3
         })
         .then((product) => {
           this.product = product;
@@ -40,11 +41,13 @@ describe("Product", () => {
     it("should create a new product", (done) => {
       Product.create({
         reactionId: 2,
-        speciesId: this.specie1.id
+        speciesId: this.specie1.id,
+        coefficient: 4
       })
       .then((product) => {
         expect(product.reactionId).toBe(2);
         expect(product.speciesId).toBe(1);
+        expect(product.coefficient).toBe(4);
         done();
       })
       .catch((err) => {

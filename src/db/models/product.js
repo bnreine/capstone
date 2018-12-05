@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
     speciesId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    coefficient: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {});
   Product.associate = function(models) {
