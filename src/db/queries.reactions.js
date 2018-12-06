@@ -33,6 +33,38 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
-  }
+  },
+
+  getReactionSpeciesCompletedProblems(completedProblemNumbers, callback){
+    let reactionSpecies = {};
+    reactionSpecies["reactantSpecies"] = [];
+    Reactant.findAll({
+      include: [{
+        model: Specie
+      }]
+    })
+    .then((reactants) => {
+      let reactionReactants = reactants.filter(reactant => completedProblemNumbers.includes(reactant.reactionId));
+      reactionSpecies["reactantSpecies"] = reactionReactants;
+      Product.findAll({
+        include: [{
+          model: Specie
+        }]
+      })
+      .then((products) => {
+        let reactionProducts = products.filter(product => completedProblemNumbers.includes(product.reactionId));
+        reactionSpecies["productSpecies"] = reactionProducts;
+        callback(null, reactionSpecies);
+      })
+      .catch((err) => {
+        callback(err);
+      })
+    })
+    .catch((err) => {
+      callback(err);
+    })
+  },
+
+
 
 }

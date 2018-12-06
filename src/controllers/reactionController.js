@@ -1,4 +1,5 @@
 const reactionQueries = require("../db/queries.reactions.js");
+let completedProblemNumbers = [];
 
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
       if(err){
         res.redirect(500, "static/index");
       } else {
-        const showAnswers = false;
+        const showAnswers = completedProblemNumbers.includes(parseInt(process.env.problemNumber));
         res.render("problems/show", {reactionSpecies, showAnswers});
       }
     })
@@ -37,8 +38,11 @@ module.exports = {
         })
 
         if(isCorrect){
+          completedProblemNumbers.push(parseInt(process.env.problemNumber));
           showAnswers = true;
           req.flash("notice", "That's Correct! Great Job.");
+          //res.render("problems/correct_answer", {reactionSpecies})
+
           res.render("problems/show", {reactionSpecies, showAnswers});
         } else {
           showAnswers = false;
@@ -65,12 +69,29 @@ module.exports = {
 
   resetProblems(req, res, next){
     process.env['problemNumber'] = 1;
+    completedProblemNumbers = [];
     reactionQueries.getReactionSpecies((err, reactionSpecies) => {
       if(err){
         res.redirect("/");
       } else {
         let showAnswers = false;
         res.render("problems/show", {reactionSpecies, showAnswers})
+      }
+    })
+  },
+
+  showHistory(req, res, next){
+    reactionQueries.getReactionSpeciesCompletedProblems(completedProblemNumbers, (err, reactionSpecies) => {
+      if(err){
+        res.redirect("/");
+      } else {
+        let problemReactants = [];
+        let problemProducts = [];
+        completedProblemNumbers.forEach((problemNumber, index) => {
+          problemReactants.push(reactionSpecies.reactantSpecies.filter(reactant => completedProblemNumbers[index] == reactant.reactionId));
+          problemProducts.push(reactionSpecies.productSpecies.filter(product => completedProblemNumbers[index] == product.reactionId));
+        });
+        res.render("history", {problemReactants, problemProducts, completedProblemNumbers})
       }
     })
   }

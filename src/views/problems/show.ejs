@@ -59,8 +59,16 @@
 
             <% }) %>
 
+            <% if(showAnswers){ %>
+              <span style="color:blue">Correct!!</span>
+            <% } %>  
+
             <br>
-            <button type="submit" class="btn btn-primary">Check Answer</button>
+
+            <% if(!showAnswers){ %>
+              <button type="submit" class="btn btn-primary">Check Answer</button>
+            <% } %>
+
           </form>
           <br>
           <a href="/problems/next_problem" class="btn btn-primary">Next Problem</a>

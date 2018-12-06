@@ -165,7 +165,14 @@ describe("routes: reactions", () => {
   })
 
 
-
+  describe("GET /history", () => {
+    it("should render a history page showing all successfully completed problems", (done) => {
+      request.get(`${base}history`, (err, res, body) => {
+        expect(body).toContain("History");
+        done();
+      })
+    })
+  })
 
 
 

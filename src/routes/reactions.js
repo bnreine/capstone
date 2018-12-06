@@ -6,5 +6,7 @@ router.get("/problems", reactionController.showProblem);
 router.post("/problems/check_answer", reactionController.checkAnswer);
 router.get("/problems/next_problem", reactionController.showNextProblem);
 router.get("/problems/reset_problems", reactionController.resetProblems);
+router.get("/history", reactionController.showHistory);
+
 
 module.exports = router;
