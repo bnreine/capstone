@@ -5,7 +5,7 @@ module.exports = {
 
 
   showProblem(req, res, next){
-    reactionQueries.getReactionSpecies(req.params.problemId, (err, reactionSpecies) => {
+    reactionQueries.getReactionSpecies((err, reactionSpecies) => {
       if(err){
         res.redirect(500, "static/index");
       } else {
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   checkAnswer(req, res, next){
-    reactionQueries.getReactionSpecies(req.params.problemId, (err, reactionSpecies) => {
+    reactionQueries.getReactionSpecies((err, reactionSpecies) => {
       if(err){
         console.log("error returning from db query")
         res.redirect("static/index")
@@ -39,15 +39,25 @@ module.exports = {
         if(isCorrect){
           showAnswers = true;
           req.flash("notice", "That's Correct! Great Job.");
-          //res.redirect("/")
           res.render("problems/show", {reactionSpecies, showAnswers});
         } else {
           showAnswers = false;
           req.flash("notice", "That's Incorrect, Please Try Again.");
-          //res.redirect("/");
           res.render("problems/show", {reactionSpecies, showAnswers});
         }
 
+      }
+    })
+  },
+
+  showNextProblem(req, res, next){
+    process.env['problemNumber'] = parseInt(process.env.problemNumber) + 1;
+    reactionQueries.getReactionSpecies((err, reactionSpecies) => {
+      if(err){
+        res.redirect("/");
+      } else {
+        let showAnswers = false;
+        res.render("problems/show", {reactionSpecies, showAnswers})
       }
     })
   }
