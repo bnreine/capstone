@@ -5,7 +5,7 @@ const Product = require("./models").Product;
 
 module.exports = {
 
-  getReactionSpecies(problemId, callback){
+  getReactionSpecies(callback){
     let reactionSpecies = {};
     reactionSpecies["reactantSpecies"] = [];
     Reactant.findAll({
@@ -14,7 +14,7 @@ module.exports = {
       }]
     })
     .then((reactants) => {
-      let reactionReactants = reactants.filter(reactant => reactant.reactionId == problemId);
+      let reactionReactants = reactants.filter(reactant => reactant.reactionId == process.env.problemNumber);
       reactionSpecies["reactantSpecies"] = reactionReactants;
       Product.findAll({
         include: [{
@@ -22,7 +22,7 @@ module.exports = {
         }]
       })
       .then((products) => {
-        let reactionProducts = products.filter(product => product.reactionId == problemId);
+        let reactionProducts = products.filter(product => product.reactionId == process.env.problemNumber);
         reactionSpecies["productSpecies"] = reactionProducts;
         callback(null, reactionSpecies);
       })

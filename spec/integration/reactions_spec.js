@@ -123,11 +123,11 @@ describe("routes: reactions", () => {
 
 
 
-  describe("GET /problems/:problemId", () => {
+  describe("GET /problems", () => {
     it("should render the problem page", (done) => {
 
 
-      request.get(`${base}problems/1`, (err, res, body) => {
+      request.get(`${base}problems`, (err, res, body) => {
         expect(body).toContain("Problem #1");
         done();
       })
@@ -135,10 +135,10 @@ describe("routes: reactions", () => {
   })
 
 
-  describe("POST /problems/:problemId/check_answer", () => {
+  describe("POST /problems/check_answer", () => {
     it("should submit correct answers and match with those in the database", (done) => {
       const options = {
-        url: `${base}problems/1/check_answer`,
+        url: `${base}problems/check_answer`,
         form: {
           Reactant1Coefficient: 2,
           Reactant2Coefficient: 1,
@@ -155,9 +155,9 @@ describe("routes: reactions", () => {
   })
 
 
-  describe("GET /problems/:problemId/next_problem", () => {
+  describe("GET /problems/next_problem", () => {
     it("should render the problem page with the next problem", (done) => {
-      request.get(`${base}problems/1/next_problem`, (err, res, body) => {
+      request.get(`${base}problems/next_problem`, (err, res, body) => {
         expect(body).toContain("Problem #2");
         done();
       })
