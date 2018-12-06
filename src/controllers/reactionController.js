@@ -60,7 +60,22 @@ module.exports = {
         res.render("problems/show", {reactionSpecies, showAnswers})
       }
     })
+  },
+
+
+  resetProblems(req, res, next){
+    process.env['problemNumber'] = 1;
+    reactionQueries.getReactionSpecies((err, reactionSpecies) => {
+      if(err){
+        res.redirect("/");
+      } else {
+        let showAnswers = false;
+        res.render("problems/show", {reactionSpecies, showAnswers})
+      }
+    })
   }
+
+
 
 
 }
