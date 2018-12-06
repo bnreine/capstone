@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ./static/partials/head.ejs %>
+  </head>
+  <body>
+
+      <!-- Navigation -->
+      <% include ./static/partials/navbar.ejs %>
+
+      <!-- Page Content -->
+      <main class="container">
+        <h3>Correct Problems</h3>
+        <% completedProblemNumbers.forEach((problemNumber, problemIndex) => { %>
+
+          <span><b>Problem #<%= problemNumber %>: </b></span>
+          <% problemReactants[problemIndex].forEach((reactant, reactantIndex) => { %>
+            <% if(reactantIndex!== 0) { %>
+              <span> + </span>
+            <% } %>
+            <span class="form-group" style="color:blue"><%= reactant.coefficient %></span>
+            <span class="form-group"><%= reactant.Specie.formula %></span>
+          <% }) %>
+
+          <span>----></span>
+
+          <% problemProducts[problemIndex].forEach((product, productIndex) => { %>
+            <% if(productIndex!== 0) { %>
+              <span> + </span>
+            <% } %>
+            <span class="form-group" style="color:blue"><%= product.coefficient %></span>
+            <span class="form-group"><%= product.Specie.formula %></span>
+          <% }) %>
+          <br>
+
+        <% }) %>
+
+      </main>
+      <!-- /.container -->
+
+      <% include ./static/partials/baseScripts.ejs %>
+    </body>
+</html>
