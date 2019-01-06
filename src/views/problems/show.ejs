@@ -61,7 +61,7 @@
 
             <% if(showAnswers){ %>
               <span style="color:blue">Correct!!</span>
-            <% } %>  
+            <% } %>
 
             <br>
 
@@ -71,7 +71,10 @@
 
           </form>
           <br>
-          <a href="/problems/next_problem" class="btn btn-primary">Next Problem</a>
+          <% if(showNextButton){ %>
+            <a href="/problems/next_problem" class="btn btn-primary">Next Problem</a>
+          <% } %>
+
           <br>
           <br>
           <a href="/problems/reset_problems" class="btn btn-primary">Reset Problems</a>
